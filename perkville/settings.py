@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'django.contrib.admin',
+    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,9 +43,11 @@ INSTALLED_APPS = (
     'perkville',
     'debug_toolbar',
     'registration',
+    'django_comments',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -1,18 +1,22 @@
 {% extends "base.html" %}
+{% load comments %}
 
 {% block content %}
 
-{% if is_paginated %}
-    <ol start="{{ page_obj.start_index }}">
-{% else %}
-    <ol>
-{% endif %}
+    {% if is_paginated %}
+<ol start="{{ page_obj.start_index }}">
+    {% else %}
+<ol>
+    {% endif %}
+
     {% for post in object_list %}
-    <li> [{{ post.votes }}]
-        <a href="{% url 'post_detail' pk=post.pk %}">
-            <b>{{ post.title }}</b>
-        </a>
-    </li>
+        <li> [{{ post.votes }}]
+            <a href="{% url 'post_detail' pk=post.pk %}">
+                <b>{{ post.title }}</b>
+                    {% get_comment_count for post as comment_count %}
+                    {{ comment_count }} comment{{ comment_count|pluralize }}
+            </a>
+        </li>
     {% endfor %}
 </ol>
 

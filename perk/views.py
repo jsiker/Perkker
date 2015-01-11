@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from .models import Post, Vote, UserProfile
 from forms import UserForm, UserProfileForm, PostForm
 
@@ -52,3 +52,13 @@ class PostCreateView(CreateView):
 
 class PostDetailView(DetailView):
     model = Post
+
+
+class PostUpdateView(UpdateView):
+    model = Post
+    form_class = PostForm
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    success_url = reverse_lazy("home")
