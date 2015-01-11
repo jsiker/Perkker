@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ object.username }}'s Profile</h2>
+{% if object.userprofile.bio %}
+<div>
+<b>Bio:</b>
+{{ object.userprofile.bio }}
+</div>
+{% endif %}
+
+{% if object.username == user.username %}
+    <p><a href='{% url "edit_profile" %}'>Edit My Profile</a></p>
+{% endif %}
+
+{% if "dog" in object.userprofile.bio %}
+    <img src="http://media.giphy.com/media/NlhZumP0s26yY/giphy.gif">
+{% endif %}
+{% endblock %}
