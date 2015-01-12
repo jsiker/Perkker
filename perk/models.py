@@ -3,7 +3,6 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
 from django.db.models.signals import post_save
-from django.template import Context, Template
 
 
 class UserProfile(models.Model):
@@ -25,6 +24,7 @@ post_save.connect(create_profile, sender=User)
 
 
 class VoteCountManager(models.Manager):
+    """QuerySet to get all Votes and easily order by descending votes"""
     def get_queryset(self):
         return super(VoteCountManager,
                      self).get_queryset().annotate(
@@ -32,13 +32,13 @@ class VoteCountManager(models.Manager):
 
 
 class Post(models.Model):
-    """Uses VoteCountManager to keep track of Vote objects on each Post"""
+
     title = models.CharField(max_length=100)
     submitter = models.ForeignKey(User)
     submitted_on = models.DateTimeField(auto_now_add=True)
     url = models.URLField("URL", max_length=200, blank=True)
     blurb = models.TextField(blank=True)
-    with_votes = VoteCountManager()
+    with_votes = VoteCountManager()   # Uses VoteCountManager to keep track of Vote objects on each Post
     objects = models.Manager()   # default manager TK read docs
 
     def __unicode__(self):

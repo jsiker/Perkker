@@ -126,6 +126,6 @@ class VoteFormBaseView(FormView):
         result = {"success": 0, "form_errors": form.errors}
         return self.create_response(result, False)
 
-"""combines the two (in theory to have both a JSON object and an HTTP return"""
+"""combines the two (in theory) to have both a JSON object and an HTTP return"""
 class VoteFormView(JSONFormMixin, VoteFormBaseView):
     pass
