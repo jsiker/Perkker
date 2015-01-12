@@ -32,21 +32,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    # 'django.contrib.comments',
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.auth',
+    'registration',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_comments',
+    'debug_toolbar',
     'perk',
     'perkville',
-    'debug_toolbar',
-    'registration',
-    'django_comments',
 )
 
-ACCOUNT_ACTIVATION_DAYS = 7
+SITE_ID = 1
 
 
 MIDDLEWARE_CLASSES = (

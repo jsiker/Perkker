@@ -1,15 +1,13 @@
+{% load staticfiles %}
 <html>
 <head>
-  <title>Perkkit</title>
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
+    <title>Perkkit</title>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/vote.js"></script>
 </head>
 <body>
 <h1>Perkkit</h1>
-
-{% block content %}
-{% endblock %}
-
-<footer>
   <p>
     <a href="{% url 'home' %}">Home</a> |
 {% if user.is_authenticated %}
@@ -23,6 +21,12 @@
     <a href="{% url 'login' %}">Login</a>
 {% endif %}
   </p>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+<p>&copy; Jon Siker, 2015</p>
 </footer>
 </body>
 </html>

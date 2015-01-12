@@ -4,9 +4,9 @@
 
 <p>Are you sure you want to delete "{{ object.title }}"?</p>
 
-<form method="post" action="{% url 'link_delete' pk=object.pk %}">
+<form method="post" action="{% url 'post_delete' pk=object.pk %}">
   {% csrf_token %}
-  <a href="{% url 'link_detail' pk=object.pk %}">Go back</a> 
+  <a href="{% url 'post_detail' pk=object.pk %}">Go back</a>
   <p><input type="submit" value="Confirm deletion" /></p>
 </form> 
 

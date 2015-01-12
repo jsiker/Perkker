@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
 from django.db.models.signals import post_save
+from django.template import Context, Template
 
 
 class UserProfile(models.Model):
@@ -51,4 +52,28 @@ class Vote(models.Model):
 
     def __unicode__(self):
         return "{} upvoted {}" .format(self.voter.username, self.link.title)
+
+
+_DiscussionTemplate = Template("""
+<li>{{ discussion.message }}{% if replies %}
+    <ul>
+        {% for reply in replies %}
+        {{ reply }}
+        {% endfor %}
+    </ul>
+{% endif %}</li>
+""".strip())
+
+
+class Discussion(models.Model):
+    message = models.TextField()
+    reply_to = models.ForeignKey('self', related_name='replies',
+        null=True, blank=True)
+
+    @property
+    def html(self):
+        return _DiscussionTemplate.render(Context({
+            'discussion': self,
+            'replies': [reply.html() for reply in self.replies.all()]
+        }))
 

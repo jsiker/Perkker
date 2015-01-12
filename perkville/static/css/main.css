@@ -1,5 +1,6 @@
 
 @import url(http://fonts.googleapis.com/css?family=Passion+One);
+@import url(http://fonts.googleapis.com/css?family=Dosis:500);
 
 html,
 body {
@@ -18,8 +19,7 @@ body {
     margin: 0 auto;
     min-height: 100%;
     position: relative;
-
-    max-width: 600px;
+    max-width: 80%;
     margin: 0 auto;
 }
 
@@ -29,7 +29,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #FF0031;
+    color: #465461;
 }
 
 h1 {
@@ -37,18 +37,23 @@ h1 {
     font-weight: normal;
     padding: 15px 0 0 0;
     font-size: 3em;
-    text-shadow: 1px 1px #000, 2px 2px #02a2fe, 3px 3px #02a2fe, 4px 4px #02a2fe, 5px 5px #02a2fe, 6px 6px #02a2fe;
+    text-shadow: 1px 1px #000, 2px 2px #AACF00, 3px 3px #AACF00, 4px 4px #AACF00, 5px 5px #AACF00, 6px 6px #AACF00;
 }
 
 a {
-    background: #FFFF00;
-    color: #00399C;
     text-decoration: none;
+    color: #465461;
+    font-family: 'Dosis', sans-serif;
+}
+
+a:hover {
+    background-color: #AACF00;
+    /*text-decoration-color: #AACF00; !important;*/
 }
 
 h2 a {
     background: transparent;
-    color: #FF0031;
+    color: #465461;
 }
 
 button,
@@ -56,6 +61,7 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"]
 {
+    font-size: 1em;
     cursor: pointer;
     -webkit-appearance: button;
     -webkit-border-radius: 4px;
@@ -67,3 +73,73 @@ input[type="submit"]
     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
 }
+
+footer p {
+    font-size: .75em;
+}
+/*.comment {*/
+    /*padding: 10px;*/
+    /*margin: 10px;*/
+    /*position: relative;*/
+/*}*/
+/*.comment_li {*/
+    /*list-style: none;*/
+/*}*/
+/*.comment_last {*/
+    /*padding: 10px;*/
+    /*margin: 10px;*/
+/*}*/
+/*.comment_info {*/
+    /*line-height: 24px;*/
+    /*position: relative;*/
+/*}*/
+/*.comment_user {*/
+    /*text-decoration: underline;*/
+    /*margin-right: 10px;*/
+    /*font-weight: bold;*/
+    /*color: #666;*/
+    /*font-size: .99em;*/
+    /*cursor: pointer;*/
+    /*float: left;*/
+/*}*/
+/*.comment_data {*/
+    /*font-size: 11px;*/
+    /*color: #666;*/
+    /*margin-top: 10px;*/
+/*}*/
+/*.comment_text {*/
+    /*margin-top: 10px;*/
+    /*float: inherit;*/
+    /*font-size: 1.08em;*/
+    /*color: black;*/
+/*}*/
+/*.comment_reply_link {*/
+    /*color: #004276;*/
+    /*outline: none;*/
+    /*text-decoration: none;*/
+    /*vertical-align: baseline;*/
+/*}*/
+/*.comments_length {*/
+    /*padding-left: 15px;*/
+    /*font-weight: bold;*/
+/*}*/
+/*#form-comment {*/
+    /*padding: 15px;*/
+    /*margin: 15px;*/
+    /*background-color: #faf0e6;*/
+    /*width: 500px;*/
+/*}*/
+/*form label {*/
+    /*float: left;*/
+    /*width: 130px;*/
+/*}*/
+/*label[for=id_honeypot],*/
+/*#id_honeypot {*/
+  /*display: none;*/
+/*}*/
+/*#cancel_reply {*/
+    /*display: none;*/
+/*}*/
+/*.comments #cancel_reply {*/
+  /*display: inline;*/
+/*}*/

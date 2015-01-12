@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load comments %}
-
 {% block content %}
 
     {% if is_paginated %}
@@ -10,13 +9,24 @@
     {% endif %}
 
     {% for post in object_list %}
-        <li> [{{ post.votes }}]
-            <a href="{% url 'post_detail' pk=post.pk %}">
-                <b>{{ post.title }}</b>
-                    {% get_comment_count for post as comment_count %}
-                    {{ comment_count }} comment{{ comment_count|pluralize }}
-            </a>
-        </li>
+{#        <form method="post" action="{% url 'vote' %}" class="vote_form">#}
+            <li> [{{ post.votes }}]
+                {% csrf_token %}
+                <input type="hidden" id="id_post" name="post" class="hidden_id" value="{{ post.pk }}"/>
+                <input type="hidden" id="id_voter" name="voter" class="hidden_id" value="{{ user.pk }}"/>
+                {% if not user.is_authenticated %}
+                    <button disabled title="Please login to vote">+</button>
+                {% elif post.pk not in voted %}
+                    <button>+</button>
+                {% else %}
+                    <button>-</button>
+                {% endif %}
+                <a href="{% url 'post_detail' pk=post.pk %}">
+                    <b>{{ post.title }}</b>
+                    <div>{% get_comment_count for post as comment_count %}{{ comment_count }} Comments</div>
+                </a>
+            </li>
+        </form>
     {% endfor %}
 </ol>
 
