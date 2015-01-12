@@ -15,16 +15,22 @@ html {
     background: white;
 }
 
-body {
+body{
     margin: 0 auto;
     min-height: 100%;
     position: relative;
     max-width: 40%;
     background: #eee;
 }
+
 .header {
     background: cornsilk;
 }
+
+.gray {
+    background: #eee;
+}
+
 h1,
 h2,
 h3,
@@ -33,12 +39,23 @@ h5,
 h6 {
     color: #465461;
     margin: 20px;
+    font-family: 'Passion One', cursive;
 }
 
 .header a:first-child,
 form,
-button {
+button,
+.desc,
+.gray a:nth-child(2n),
+.gray p,
+dt,
+#bio {
     margin-left: 20px;
+}
+
+img {
+    margin-left: 20px;
+    padding-bottom: 20px;
 }
 
 h1 {
@@ -49,7 +66,8 @@ h1 {
     text-shadow: 1px 1px #000, 2px 2px #AACF00, 3px 3px #AACF00, 4px 4px #AACF00, 5px 5px #AACF00, 6px 6px #AACF00;
 }
 
-li {
+li,
+div {
     font-family: 'Dosis', sans-serif;
 }
 
@@ -64,7 +82,6 @@ a {
 }
 
 .header a:hover {
-    /*text-decoration: double; !important;*/
     background: #AACF00;
 }
 
@@ -74,10 +91,11 @@ h2 a {
 }
 .desc {
     background-color: white;
-    width: 30%;
+    width: 80%;
     padding: 4px;
     border-radius: 10px;
     margin-bottom: 10px;
+    margin-left: 10px;
     border: 1px solid #000000;
 }
 button,
@@ -147,7 +165,7 @@ footer p {
     /*font-size: 1.08em;*/
     /*color: black;*/
 /*}*/
-/*.comment_reply_link {*/
+/*.comment_reply_post {*/
     /*color: #004276;*/
     /*outline: none;*/
     /*text-decoration: none;*/

@@ -2,10 +2,11 @@
 {% load comments %}
 {% block content %}
 
+<div class="gray">
     {% if is_paginated %}
-<ol start="{{ page_obj.start_index }}">
+        <ol start="{{ page_obj.start_index }}">
     {% else %}
-<ol>
+        <ol>
     {% endif %}
 
     {% for post in object_list %}
@@ -40,5 +41,5 @@
     {% endif %}
     </div>
 {% endif %}
-
+</div>
 {% endblock %}

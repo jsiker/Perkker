@@ -12,7 +12,7 @@
       <p>
         <a href="{% url 'home' %}">Home</a> |
     {% if user.is_authenticated %}
-        <a href="{%  url 'post_create' %}">Submit Link</a> |
+        <a href="{%  url 'post_create' %}">Submit Post</a> |
         <a href="{% url 'logout' %}">Logout</a> |
         <a href="{%  url 'profile' slug=user.username %}">
             <b>{{ user.username }}</b>
@@ -23,11 +23,13 @@
     {% endif %}
     </p>
 </div>
+
 {% block content %}
 {% endblock %}
 
 <footer>
-<p>&copy; Jon Siker, 2015</p>
+    <p>&copy; Jon Siker, 2015</p>
 </footer>
+
 </body>
 </html>

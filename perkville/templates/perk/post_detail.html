@@ -2,7 +2,8 @@
 {% load comments %}
 
 {% block content %}
-<h2><a href="{{ object.link }}">{{ object.title }}</a></h2>
+    <div class="gray">
+<h2><a href="{{ object.post }}">{{ object.title }}</a></h2>
 
 {% if object.submitter == user %}
     <a href="{%  url 'post_update' pk=object.pk %}">Edit</a> |
@@ -32,5 +33,5 @@
     <p>Please <a href="{% url 'auth_login' %}">log in</a> to leave a comment.</p>
 {% endif %}
 {% render_comment_list for object %}
-
+</div>
 {% endblock %}

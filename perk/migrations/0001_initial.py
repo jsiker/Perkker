@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             name='Vote',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('link', models.ForeignKey(to='perk.Post')),
+                ('post', models.ForeignKey(to='perk.Post')),
                 ('voter', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={

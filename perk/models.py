@@ -39,7 +39,7 @@ class Post(models.Model):
     url = models.URLField("URL", max_length=200, blank=True)
     blurb = models.TextField(blank=True)
     with_votes = VoteCountManager()   # Uses VoteCountManager to keep track of Vote objects on each Post
-    objects = models.Manager()   # default manager TK read docs
+    objects = models.Manager()   # default manager to query Post.objects
 
     def __unicode__(self):
         return self.title

@@ -11,8 +11,8 @@ from forms import UserProfileForm, PostForm, VoteForm
 
 
 class PostListView(ListView):
-    """Gets data from PostListView. If User is logged in, filters User's votes. Places those votes in a list called 'voted'
-    to more easily manage who has voted for what."""
+    """Gets data from PostListView. If User is logged in, filters User's votes. Places those votes in a list called
+    'voted' to more easily manage who has voted for what."""
     model = Post
     queryset = Post.with_votes.all()
     paginate_by = 5
@@ -29,7 +29,7 @@ class PostListView(ListView):
 
 
 class UserProfileDetailView(DetailView):
-    """Gets user object from user model upon creation, creates profile and returns user"""
+    """Gets user object from user model upon creation, creates User's profile and returns user"""
     model = get_user_model()
     slug_field = "username"
     template_name = "user_detail.html"
@@ -126,6 +126,6 @@ class VoteFormBaseView(FormView):
         result = {"success": 0, "form_errors": form.errors}
         return self.create_response(result, False)
 
-"""combines the two (in theory) to have both a JSON object and an HTTP return"""
+# combines the two (in theory) to have both a JSON object with an HTTP return
 class VoteFormView(JSONFormMixin, VoteFormBaseView):
     pass
