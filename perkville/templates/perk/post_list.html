@@ -9,8 +9,8 @@
     {% endif %}
 
     {% for post in object_list %}
-{#        <form method="post" action="{% url 'vote' %}" class="vote_form">#}
-            <li> [{{ post.votes }}]
+        <form method="post" action="{% url 'vote' %}" class="vote_form">
+            <li> ({{ post.votes }})
                 {% csrf_token %}
                 <input type="hidden" id="id_post" name="post" class="hidden_id" value="{{ post.pk }}"/>
                 <input type="hidden" id="id_voter" name="voter" class="hidden_id" value="{{ user.pk }}"/>
@@ -23,7 +23,7 @@
                 {% endif %}
                 <a href="{% url 'post_detail' pk=post.pk %}">
                     <b>{{ post.title }}</b>
-                    <div>{% get_comment_count for post as comment_count %}{{ comment_count }} Comments</div>
+                    <div>{% get_comment_count for post as comment_count %}{{ comment_count }} {% if comment_count == 1 %} Comment {% elif comment_count != 1 %} Comments {% endif %} (Submitted by {{ post.submitter }} @ {{ post.submitted_on }})</div>
                 </a>
             </li>
         </form>
@@ -34,6 +34,9 @@
     <div class="pagination">
     {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+    {% endif %}
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a>
     {% endif %}
     </div>
 {% endif %}

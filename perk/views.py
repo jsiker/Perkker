@@ -1,25 +1,21 @@
 import json
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView, FormView
 from .models import Post, Vote, UserProfile
-from forms import UserForm, UserProfileForm, PostForm, VoteForm
-from registration.backends.simple.views import RegistrationView
+from forms import UserProfileForm, PostForm, VoteForm
 
 # Create your views here.
 
 
-# def users(request):
-#     url = '/users/%s/' % request.user.username
-#     return HttpResponseRedirect(url)
-
-
 class PostListView(ListView):
+    """Gets data from PostListView. If User is logged in, filters User's votes. Places those votes in a list called 'voted'
+    to more easily manage who has voted for what."""
     model = Post
     queryset = Post.with_votes.all()
-    paginate_by = 10
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
@@ -33,6 +29,7 @@ class PostListView(ListView):
 
 
 class UserProfileDetailView(DetailView):
+    """Gets user object from user model upon creation, creates profile and returns user"""
     model = get_user_model()
     slug_field = "username"
     template_name = "user_detail.html"
@@ -44,6 +41,9 @@ class UserProfileDetailView(DetailView):
 
 
 class UserProfileEditView(UpdateView):
+    """Gets user object to ensure only logged in user can edit their own profile.
+    Uses custom form to provide fields for profile update.
+    Success URL returns to the same profile page upon edit."""
     model = UserProfile
     form_class = UserProfileForm
     template_name = "edit_profile.html"
@@ -56,6 +56,8 @@ class UserProfileEditView(UpdateView):
 
 
 class PostCreateView(CreateView):
+    """Following Post classes use builtin Views for CRUD actions; sets score and submitter before saving into the
+     database (commit=False)"""
     model = Post
     form_class = PostForm
 
@@ -83,6 +85,7 @@ class PostDeleteView(DeleteView):
 
 
 class JSONFormMixin(object):
+    """Dict contains data we need, which is then turned into JSON object and then returned if valid"""
     def create_response(self, vdict=dict(), valid_form=True):
         response = HttpResponse(json.dumps(vdict), content_type='application/json')
         response.status = 200 if valid_form else 500
@@ -92,21 +95,23 @@ class JSONFormMixin(object):
 class VoteFormBaseView(FormView):
     form_class = VoteForm
 
+    # overwrites above to return a http response (rather than a JSON object)
     def create_response(self, vdict=dict(), valid_form=True):
         response = HttpResponse(json.dumps(vdict))
         response.status = 200 if valid_form else 500
         return response
 
+    # ties vote to post, vote to logged in user, filters on votes already cast
     def form_valid(self, form):
         post = get_object_or_404(Post, pk=form.data['link'])
         user = self.request.user
-        prev_votes = Vote.objects.filter(voter=user, post=post)
+        prev_votes = Vote.objects.filter(voter=user, link=post)
         has_voted = (len(prev_votes) > 0)
 
         result = {"success": 1}
         if not has_voted:
             # add vote
-            v = Vote.objects.create(voter=user, post=post)
+            v = Vote.objects.create(voter=user, link=post)
             result["vote_obj"] = v.id
             print("Voted")
         else:
@@ -121,6 +126,6 @@ class VoteFormBaseView(FormView):
         result = {"success": 0, "form_errors": form.errors}
         return self.create_response(result, False)
 
-
+"""combines the two (in theory to have both a JSON object and an HTTP return"""
 class VoteFormView(JSONFormMixin, VoteFormBaseView):
     pass

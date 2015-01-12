@@ -27,4 +27,3 @@ class PostForm(forms.ModelForm):
 class VoteForm(forms.ModelForm):
     class Meta:
         model = Vote
-        # exclude = ('',)

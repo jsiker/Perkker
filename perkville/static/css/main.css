@@ -40,6 +40,10 @@ h1 {
     text-shadow: 1px 1px #000, 2px 2px #AACF00, 3px 3px #AACF00, 4px 4px #AACF00, 5px 5px #AACF00, 6px 6px #AACF00;
 }
 
+li {
+    font-family: 'Dosis', sans-serif;
+}
+
 a {
     text-decoration: none;
     color: #465461;
@@ -48,14 +52,20 @@ a {
 
 a:hover {
     background-color: #AACF00;
-    /*text-decoration-color: #AACF00; !important;*/
 }
 
 h2 a {
     background: transparent;
     color: #465461;
 }
-
+.desc {
+    background-color: white;
+    width: 30%;
+    padding: 4px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #000000;
+}
 button,
 input[type="button"],
 input[type="reset"],
@@ -76,6 +86,7 @@ input[type="submit"]
 
 footer p {
     font-size: .75em;
+    font-family: 'Dosis', sans-serif;
 }
 /*.comment {*/
     /*padding: 10px;*/

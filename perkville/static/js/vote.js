@@ -2,6 +2,7 @@ jQuery(document).ready(function($)
     {
 	$(".vote_form").submit(function(e) 
 		{
+//  jQuery to toggle vote button + / - and POST a vote object
 		    e.preventDefault(); 
 		    var btn = $("button", this);
 		    var l_id = $(".hidden_id", this).val();

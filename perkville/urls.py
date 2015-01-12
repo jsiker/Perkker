@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required as auth
 from perk.views import PostListView, UserProfileDetailView, UserProfileEditView, PostCreateView, PostDetailView, \
-    PostUpdateView, PostDeleteView#, VoteFormView
+    PostUpdateView, PostDeleteView, VoteFormView
 
 admin.autodiscover()
 
@@ -20,7 +20,7 @@ urlpatterns = patterns('',
 
     ## homepage ##
     url(r'^$', PostListView.as_view(), name='home'),
-    # url(r'^vote/$', auth(VoteFormView.as_view()), name="vote"),
+    url(r'^vote/$', auth(VoteFormView.as_view()), name="vote"),
 
     ## profile stuff ##
     url(r'^users/(?P<slug>\w+)/$', UserProfileDetailView.as_view(), name='profile'),
@@ -33,7 +33,6 @@ urlpatterns = patterns('',
     url(r'^post/delete/(?P<pk>\d+)/$', auth(PostDeleteView.as_view()), name='post_delete'),
 
     (r'^comments/', include('django_comments.urls')),
-    # url(r'^post/comments/', include('django.contrib.comments.urls')),
 
 
 )

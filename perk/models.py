@@ -7,6 +7,7 @@ from django.template import Context, Template
 
 
 class UserProfile(models.Model):
+    """Pulls from built-in User, adds a bio field"""
     user = models.OneToOneField(User, unique=True)
     bio = models.TextField(null=True)
 
@@ -16,7 +17,7 @@ class UserProfile(models.Model):
 
 def create_profile(sender, instance, created, **kwargs):
     """Callback to create user profile at time user is created,
-    in case User doesn't create his/her own profile"""
+    in case User doesn't create his/her own profile; returns a tuple"""
     if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
 
@@ -31,6 +32,7 @@ class VoteCountManager(models.Manager):
 
 
 class Post(models.Model):
+    """Uses VoteCountManager to keep track of Vote objects on each Post"""
     title = models.CharField(max_length=100)
     submitter = models.ForeignKey(User)
     submitted_on = models.DateTimeField(auto_now_add=True)
@@ -43,6 +45,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
+        """Used to generate URL @ post/post.id"""
         return reverse('post_detail', kwargs={'pk': str(self.id)})
 
 
@@ -54,26 +57,5 @@ class Vote(models.Model):
         return "{} upvoted {}" .format(self.voter.username, self.link.title)
 
 
-_DiscussionTemplate = Template("""
-<li>{{ discussion.message }}{% if replies %}
-    <ul>
-        {% for reply in replies %}
-        {{ reply }}
-        {% endfor %}
-    </ul>
-{% endif %}</li>
-""".strip())
 
-
-class Discussion(models.Model):
-    message = models.TextField()
-    reply_to = models.ForeignKey('self', related_name='replies',
-        null=True, blank=True)
-
-    @property
-    def html(self):
-        return _DiscussionTemplate.render(Context({
-            'discussion': self,
-            'replies': [reply.html() for reply in self.replies.all()]
-        }))
 

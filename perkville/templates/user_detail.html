@@ -2,9 +2,9 @@
 
 {% block content %}
 <h2>{{ object.username }}'s Profile</h2>
-{% if object.userprofile %}
+{% if object.userprofile.bio %}
 <div>
-{{ object.userprofile }}
+{{ object.userprofile.bio }}
 </div>
 {% endif %}
 
